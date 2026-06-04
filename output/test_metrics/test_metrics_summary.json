@@ -1,0 +1,29 @@
+[
+  {
+    "model":"cnn",
+    "accuracy":0.9973,
+    "precision":0.9976,
+    "recall":0.9973,
+    "f1":0.9974,
+    "psnr":null,
+    "ssim":1.0
+  },
+  {
+    "model":"mlp",
+    "accuracy":1.0,
+    "precision":1.0,
+    "recall":1.0,
+    "f1":1.0,
+    "psnr":null,
+    "ssim":1.0
+  },
+  {
+    "model":"fusion",
+    "accuracy":1.0,
+    "precision":1.0,
+    "recall":1.0,
+    "f1":1.0,
+    "psnr":null,
+    "ssim":1.0
+  }
+]

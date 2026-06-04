@@ -1,0 +1,6 @@
+class_name,count
+allpass,1000
+bandpass,1000
+bandstop,1000
+highpass,1000
+lowpass,1000

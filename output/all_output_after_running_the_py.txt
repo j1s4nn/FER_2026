@@ -1,0 +1,209 @@
+
+(ml) C:\Users\jisan\OneDrive\Desktop\Digital_image_processing\DIP_ZTransform_DL>python src/06_run_all.py
+
+============================================================
+  DIP — Z-Transform Pole-Zero Deep Learning Pipeline
+============================================================
+  Name      : Hossen Md Jisan
+  ID        : 202353460019
+  Course    : Digital Image Processing
+  Base Dir  : C:\Users\jisan\OneDrive\Desktop\Digital_image_processing\DIP_ZTransform_DL
+
+============================================================
+  STEP: 01  Dataset Generation
+============================================================
+[INFO] Generating dataset ...
+Samples: 100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 5000/5000 [01:34<00:00, 53.13it/s] 
+[INFO] Dataset saved to C:\Users\jisan\OneDrive\Desktop\Digital_image_processing\DIP_ZTransform_DL\dataset\dataset.npz
+[INFO] Metadata saved to C:\Users\jisan\OneDrive\Desktop\Digital_image_processing\DIP_ZTransform_DL\dataset\metadata.csv
+[INFO] Class distribution saved to C:\Users\jisan\OneDrive\Desktop\Digital_image_processing\DIP_ZTransform_DL\dataset\class_distribution.csv
+class_name  count
+   allpass   1000
+  bandpass   1000
+  bandstop   1000
+  highpass   1000
+   lowpass   1000
+[DONE] Dataset generation complete.
+
+  [OK] 01  Dataset Generation  (96.4s)
+
+============================================================
+  STEP: 02  Dataset Visualization
+============================================================
+[INFO] Loading dataset ...
+[INFO] Dataset loaded: 5000 samples, 5 classes.
+[SAVED] C:\Users\jisan\OneDrive\Desktop\Digital_image_processing\DIP_ZTransform_DL\output\dataset_viz\fig01_sample_pz_maps.png
+[SAVED] C:\Users\jisan\OneDrive\Desktop\Digital_image_processing\DIP_ZTransform_DL\output\dataset_viz\fig02_mean_freq_response.png
+[SAVED] C:\Users\jisan\OneDrive\Desktop\Digital_image_processing\DIP_ZTransform_DL\output\dataset_viz\fig03_class_distribution.png
+[SAVED] C:\Users\jisan\OneDrive\Desktop\Digital_image_processing\DIP_ZTransform_DL\output\dataset_viz\fig04_freq_response_heatmap.png
+[SAVED] C:\Users\jisan\OneDrive\Desktop\Digital_image_processing\DIP_ZTransform_DL\output\dataset_viz\fig05_pixel_distribution.png
+[SAVED] C:\Users\jisan\OneDrive\Desktop\Digital_image_processing\DIP_ZTransform_DL\output\dataset_viz\fig06_pz_scatter.png
+
+[DONE] All dataset visualizations saved to: C:\Users\jisan\OneDrive\Desktop\Digital_image_processing\DIP_ZTransform_DL\output\dataset_viz
+
+  [OK] 02  Dataset Visualization  (5.2s)
+
+============================================================
+  STEP: 03  Model Verification
+============================================================
+[CNN     ] output shape: torch.Size([4, 5])  |  params: 421,861
+[MLP     ] output shape: torch.Size([4, 5])  |  params: 75,269
+[FUSION  ] output shape: torch.Size([4, 5])  |  params: 455,077
+[DONE] Model definitions verified.
+
+  [OK] 03  Model Verification  (2.5s)
+
+============================================================
+  STEP: 04  Model Training
+============================================================
+
+=======================================================
+  Training: CNN
+=======================================================
+  Parameters: 421,861  |  Device: cuda
+  Ep   1/50 | Loss 0.9643/0.9839 | Acc 0.761/0.655 | LR 3.00e-04
+  Ep   5/50 | Loss 0.2482/0.2381 | Acc 1.000/1.000 | LR 2.93e-04
+  Ep  10/50 | Loss 0.2410/0.3000 | Acc 1.000/0.991 | LR 2.71e-04
+  Ep  15/50 | Loss 0.2395/0.2325 | Acc 1.000/1.000 | LR 2.38e-04
+  Ep  20/50 | Loss 0.2386/0.2316 | Acc 1.000/1.000 | LR 1.96e-04
+  Ep  25/50 | Loss 0.2375/0.2281 | Acc 1.000/1.000 | LR 1.50e-04
+  Ep  30/50 | Loss 0.2371/0.2286 | Acc 1.000/1.000 | LR 1.04e-04
+  Ep  35/50 | Loss 0.2366/0.2273 | Acc 1.000/1.000 | LR 6.18e-05
+  Ep  40/50 | Loss 0.2363/0.2250 | Acc 1.000/1.000 | LR 2.86e-05
+  Ep  45/50 | Loss 0.2357/0.2246 | Acc 1.000/1.000 | LR 7.34e-06
+  Ep  50/50 | Loss 0.2360/0.2248 | Acc 1.000/1.000 | LR 0.00e+00
+  Best Val Acc: 1.0000
+[SAVED] C:\Users\jisan\OneDrive\Desktop\Digital_image_processing\DIP_ZTransform_DL\output\figures\fig_train_curves_cnn.png
+
+=======================================================
+  Training: MLP
+=======================================================
+  Parameters: 75,269  |  Device: cuda
+  Ep   1/50 | Loss 1.0525/0.7321 | Acc 0.773/0.840 | LR 3.00e-04
+  Ep   5/50 | Loss 0.4108/0.3085 | Acc 0.925/0.972 | LR 2.93e-04
+  Ep  10/50 | Loss 0.3649/0.2821 | Acc 0.943/0.983 | LR 2.71e-04
+  Ep  15/50 | Loss 0.3500/0.2755 | Acc 0.952/0.979 | LR 2.38e-04
+  Ep  20/50 | Loss 0.3425/0.2732 | Acc 0.955/0.980 | LR 1.96e-04
+  Ep  25/50 | Loss 0.3274/0.2751 | Acc 0.962/0.972 | LR 1.50e-04
+  Ep  30/50 | Loss 0.3297/0.2646 | Acc 0.959/0.983 | LR 1.04e-04
+  Ep  35/50 | Loss 0.3189/0.2705 | Acc 0.966/0.975 | LR 6.18e-05
+  Ep  40/50 | Loss 0.3159/0.2608 | Acc 0.967/0.983 | LR 2.86e-05
+  Ep  45/50 | Loss 0.3178/0.2580 | Acc 0.963/0.999 | LR 7.34e-06
+  Ep  50/50 | Loss 0.3240/0.2673 | Acc 0.964/0.979 | LR 0.00e+00
+  Best Val Acc: 0.9987
+[SAVED] C:\Users\jisan\OneDrive\Desktop\Digital_image_processing\DIP_ZTransform_DL\output\figures\fig_train_curves_mlp.png
+
+=======================================================
+  Training: FUSION
+=======================================================
+  Parameters: 455,077  |  Device: cuda
+  Ep   1/50 | Loss 0.9317/0.7942 | Acc 0.782/0.716 | LR 3.00e-04
+  Ep   5/50 | Loss 0.2533/0.2354 | Acc 1.000/1.000 | LR 2.93e-04
+  Ep  10/50 | Loss 0.2444/0.2315 | Acc 1.000/1.000 | LR 2.71e-04
+  Ep  15/50 | Loss 0.2409/0.2289 | Acc 1.000/1.000 | LR 2.38e-04
+  Ep  20/50 | Loss 0.2387/0.2314 | Acc 1.000/1.000 | LR 1.96e-04
+  Ep  25/50 | Loss 0.2379/0.2263 | Acc 1.000/1.000 | LR 1.50e-04
+  Ep  30/50 | Loss 0.2381/0.2350 | Acc 1.000/1.000 | LR 1.04e-04
+  Ep  35/50 | Loss 0.2374/0.2271 | Acc 1.000/1.000 | LR 6.18e-05
+  Ep  40/50 | Loss 0.2369/0.2266 | Acc 1.000/1.000 | LR 2.86e-05
+  Ep  45/50 | Loss 0.2363/0.2254 | Acc 1.000/1.000 | LR 7.34e-06
+  Ep  50/50 | Loss 0.2362/0.2253 | Acc 1.000/1.000 | LR 0.00e+00
+  Best Val Acc: 1.0000
+[SAVED] C:\Users\jisan\OneDrive\Desktop\Digital_image_processing\DIP_ZTransform_DL\output\figures\fig_train_curves_fusion.png
+
+[SUMMARY] Best Validation Accuracies:
+  CNN     : 1.0000
+  MLP     : 0.9987
+  FUSION  : 1.0000
+
+[SAVED] C:\Users\jisan\OneDrive\Desktop\Digital_image_processing\DIP_ZTransform_DL\dataset\training_summary.json
+[DONE] Training complete.
+
+  [OK] 04  Model Training  (110.7s)
+
+============================================================
+  STEP: 05  Model Evaluation
+============================================================
+[INFO] Loading test data ...
+
+[EVAL] CNN ...
+C:\Users\jisan\OneDrive\Desktop\Digital_image_processing\DIP_ZTransform_DL\src\05_evaluate.py:292: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which use
+s the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#u
+ntrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects
+ will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  model.load_state_dict(torch.load(ckpt_path, map_location=DEVICE))
+C:\Users\jisan\miniconda3\envs\ml\lib\site-packages\skimage\metrics\simple_metrics.py:168: RuntimeWarning: divide by zero encountered in scalar divide
+  return 10 * np.log10((data_range**2) / err)
+  Accuracy : 0.9973
+  Precision: 0.9976
+  Recall   : 0.9973
+  F1       : 0.9974
+  PSNR     : inf dB
+  SSIM     : 1.0000
+[SAVED] C:\Users\jisan\OneDrive\Desktop\Digital_image_processing\DIP_ZTransform_DL\output\test_metrics\classification_report_cnn.txt
+[SAVED] C:\Users\jisan\OneDrive\Desktop\Digital_image_processing\DIP_ZTransform_DL\output\figures\fig_confusion_cnn.png
+[SAVED] C:\Users\jisan\OneDrive\Desktop\Digital_image_processing\DIP_ZTransform_DL\output\figures\fig_pz_predictions_cnn.png
+[SAVED] C:\Users\jisan\OneDrive\Desktop\Digital_image_processing\DIP_ZTransform_DL\output\figures\fig_f1_per_class_cnn.png
+
+[EVAL] MLP ...
+C:\Users\jisan\OneDrive\Desktop\Digital_image_processing\DIP_ZTransform_DL\src\05_evaluate.py:292: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which use
+s the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#u
+ntrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects
+ will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  model.load_state_dict(torch.load(ckpt_path, map_location=DEVICE))
+C:\Users\jisan\miniconda3\envs\ml\lib\site-packages\skimage\metrics\simple_metrics.py:168: RuntimeWarning: divide by zero encountered in scalar divide
+  return 10 * np.log10((data_range**2) / err)
+  Accuracy : 1.0000
+  Precision: 1.0000
+  Recall   : 1.0000
+  F1       : 1.0000
+  PSNR     : inf dB
+  SSIM     : 1.0000
+[SAVED] C:\Users\jisan\OneDrive\Desktop\Digital_image_processing\DIP_ZTransform_DL\output\test_metrics\classification_report_mlp.txt
+[SAVED] C:\Users\jisan\OneDrive\Desktop\Digital_image_processing\DIP_ZTransform_DL\output\figures\fig_confusion_mlp.png
+[SAVED] C:\Users\jisan\OneDrive\Desktop\Digital_image_processing\DIP_ZTransform_DL\output\figures\fig_pz_predictions_mlp.png
+[SAVED] C:\Users\jisan\OneDrive\Desktop\Digital_image_processing\DIP_ZTransform_DL\output\figures\fig_f1_per_class_mlp.png
+
+[EVAL] FUSION ...
+C:\Users\jisan\OneDrive\Desktop\Digital_image_processing\DIP_ZTransform_DL\src\05_evaluate.py:292: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which use
+s the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#u
+ntrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects
+ will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  model.load_state_dict(torch.load(ckpt_path, map_location=DEVICE))
+C:\Users\jisan\miniconda3\envs\ml\lib\site-packages\skimage\metrics\simple_metrics.py:168: RuntimeWarning: divide by zero encountered in scalar divide
+  return 10 * np.log10((data_range**2) / err)
+  Accuracy : 1.0000
+  Precision: 1.0000
+  Recall   : 1.0000
+  F1       : 1.0000
+  PSNR     : inf dB
+  SSIM     : 1.0000
+[SAVED] C:\Users\jisan\OneDrive\Desktop\Digital_image_processing\DIP_ZTransform_DL\output\test_metrics\classification_report_fusion.txt
+[SAVED] C:\Users\jisan\OneDrive\Desktop\Digital_image_processing\DIP_ZTransform_DL\output\figures\fig_confusion_fusion.png
+[SAVED] C:\Users\jisan\OneDrive\Desktop\Digital_image_processing\DIP_ZTransform_DL\output\figures\fig_pz_predictions_fusion.png
+[SAVED] C:\Users\jisan\OneDrive\Desktop\Digital_image_processing\DIP_ZTransform_DL\output\figures\fig_f1_per_class_fusion.png
+
+[SAVED] C:\Users\jisan\OneDrive\Desktop\Digital_image_processing\DIP_ZTransform_DL\output\test_metrics\test_metrics_summary.csv
+[SAVED] C:\Users\jisan\OneDrive\Desktop\Digital_image_processing\DIP_ZTransform_DL\output\test_metrics\test_metrics_summary.json
+
+[SUMMARY TABLE]
+ model  accuracy  precision  recall     f1  psnr  ssim
+   cnn    0.9973     0.9976  0.9973 0.9974   inf   1.0
+   mlp    1.0000     1.0000  1.0000 1.0000   inf   1.0
+fusion    1.0000     1.0000  1.0000 1.0000   inf   1.0
+[SAVED] C:\Users\jisan\OneDrive\Desktop\Digital_image_processing\DIP_ZTransform_DL\output\test_metrics\fig_model_comparison.png
+
+[DONE] Evaluation complete.
+
+  [OK] 05  Model Evaluation  (9.3s)
+
+============================================================
+  ALL STEPS COMPLETE  (224.1s total)
+============================================================
+  Outputs saved to:
+    dataset/              — .npz, .csv, checkpoints
+    output/figures/       — training curves, confusion matrices, predictions
+    output/dataset_viz/   — pole-zero maps, frequency response plots
+    output/test_metrics/  — PSNR, SSIM, F1, accuracy (CSV + JSON + PNG)
+
+(ml) C:\Users\jisan\OneDrive\Desktop\Digital_image_processing\DIP_ZTransform_DL>

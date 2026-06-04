@@ -1,0 +1,14 @@
+{
+  "cnn": {
+    "checkpoint": "C:\\Users\\jisan\\OneDrive\\Desktop\\Digital_image_processing\\DIP_ZTransform_DL\\dataset\\best_cnn.pt",
+    "best_val_acc": 1.0
+  },
+  "mlp": {
+    "checkpoint": "C:\\Users\\jisan\\OneDrive\\Desktop\\Digital_image_processing\\DIP_ZTransform_DL\\dataset\\best_mlp.pt",
+    "best_val_acc": 0.9986666666666667
+  },
+  "fusion": {
+    "checkpoint": "C:\\Users\\jisan\\OneDrive\\Desktop\\Digital_image_processing\\DIP_ZTransform_DL\\dataset\\best_fusion.pt",
+    "best_val_acc": 1.0
+  }
+}

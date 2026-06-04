@@ -1,0 +1,4 @@
+model,accuracy,precision,recall,f1,psnr,ssim
+cnn,0.9973,0.9976,0.9973,0.9974,inf,1.0
+mlp,1.0,1.0,1.0,1.0,inf,1.0
+fusion,1.0,1.0,1.0,1.0,inf,1.0
