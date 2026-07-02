@@ -1,41 +1,29 @@
-# Python
+# I keep the raw dataset and generated artifacts out of version control,
+# they're either too large or too easy to regenerate to belong in git.
+data/raw/*
+!data/raw/.gitkeep
+data/processed/*
+!data/processed/.gitkeep
+
+models/*
+!models/.gitkeep
+
+figures/*
+!figures/.gitkeep
+
+output/*
+!output/.gitkeep
+
+metrics_summary.csv
+
+# Kaggle credentials should never end up in a public repo
+kaggle.json
+
+# standard Python housekeeping
 __pycache__/
-*.py[cod]
-*.pyo
-*.pyd
-.Python
-*.egg-info/
-dist/
-build/
-.env
-.venv
-env/
-venv/
-
-# Dataset (large binary files - regenerate via 01_dataset_generation.py)
-dataset/*.npz
-
-# Model checkpoints (regenerate via 04_train.py)
-dataset/*.pt
-
-# Jupyter
+*.pyc
 .ipynb_checkpoints/
-*.ipynb
-
-# OS
 .DS_Store
-Thumbs.db
-
-# IDE
-.vscode/
-.idea/
-
-# Paper (uploaded manually)
-paper/*.pdf
-paper/*.tex
-paper/*.aux
-paper/*.log
-paper/*.bbl
-paper/*.blg
-paper/*.out
-paper/*.synctex.gz
+*.egg-info/
+venv/
+.venv/
