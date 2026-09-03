@@ -1,28 +1,31 @@
 # -*- coding: utf-8 -*-
 """
-10_live_demo.py
+12_live_demo.py
 
 This is the interactive part of the project. I built a small Gradio app
-with one button per model (KNN, SVM, CNN, ResNet50, EfficientNetB0).
-I upload a face image, pick a button, and that specific model runs
-inference on it. The app then renders a result panel (the face plus the
-predicted emotion and confidence bars for every class) and saves that
-panel as a PNG into the output/ folder, named with the model and a
+with one button per model (KNN, SVM, CNN, VGG16, MobileNetV2, ResNet50,
+EfficientNetB0). I upload a face image, pick a button, and that specific
+model runs inference on it. The app then renders a result panel (the face
+plus the predicted emotion and confidence bars for every class) and saves
+that panel as a PNG into the output/ folder, named with the model and a
 timestamp so repeated runs never overwrite each other.
 
-I kept the five buttons completely independent on purpose, that way I can
-run the exact same photo through all five models one at a time and
+I kept the seven buttons completely independent on purpose, that way I can
+run the exact same photo through all seven models one at a time and
 compare the saved output images side by side afterward.
 
-Before running this, every model needs to already be trained and saved:
+Before running this, every model needs to already be trained and saved
+(or just run train_all.py once):
     python src/04_model_knn.py
     python src/05_model_svm.py
     python src/06_model_cnn.py
-    python src/07_model_resnet50.py
-    python src/08_model_efficientnet.py
+    python src/07_model_vgg16.py
+    python src/08_model_mobilenetv2.py
+    python src/09_model_resnet50.py
+    python src/10_model_efficientnet.py
 
 Then:
-    python src/10_live_demo.py
+    python src/12_live_demo.py
 """
 
 import os
@@ -114,6 +117,22 @@ def build_effnet_arch():
     return model
 
 
+def build_vgg_arch():
+    model = models.vgg16(weights=None)
+    model.classifier[6] = nn.Sequential(
+        nn.Linear(4096, 512),
+        nn.ReLU(), nn.Dropout(0.4),
+        nn.Linear(512, len(EMOTION_LABELS))
+    )
+    return model
+
+
+def build_mobilenet_arch():
+    model = models.mobilenet_v2(weights=None)
+    model.classifier[1] = nn.Linear(model.classifier[1].in_features, len(EMOTION_LABELS))
+    return model
+
+
 def load_model(model_name):
     if model_name in _loaded:
         return _loaded[model_name]
@@ -137,6 +156,14 @@ def load_model(model_name):
     elif model_name == 'EfficientNetB0':
         obj = build_effnet_arch()
         obj.load_state_dict(torch.load(os.path.join(MODELS_DIR, 'EfficientNetB0_best.pth'), map_location=device))
+        obj.to(device).eval()
+    elif model_name == 'VGG16':
+        obj = build_vgg_arch()
+        obj.load_state_dict(torch.load(os.path.join(MODELS_DIR, 'VGG16_best.pth'), map_location=device))
+        obj.to(device).eval()
+    elif model_name == 'MobileNetV2':
+        obj = build_mobilenet_arch()
+        obj.load_state_dict(torch.load(os.path.join(MODELS_DIR, 'MobileNetV2_best.pth'), map_location=device))
         obj.to(device).eval()
     else:
         raise ValueError(f'Unknown model name: {model_name}')
@@ -229,7 +256,9 @@ def analyze_with_model(model_name, image):
     image_np = np.array(image.convert('RGB'))
     model_path_map = {
         'KNN': 'knn_model.pkl', 'SVM': 'svm_model.pkl',
-        'CNN': 'CNN_best.pth', 'ResNet50': 'ResNet50_best.pth',
+        'CNN': 'CNN_best.pth', 'VGG16': 'VGG16_best.pth',
+        'MobileNetV2': 'MobileNetV2_best.pth',
+        'ResNet50': 'ResNet50_best.pth',
         'EfficientNetB0': 'EfficientNetB0_best.pth',
     }
     expected_file = os.path.join(MODELS_DIR, model_path_map[model_name])
@@ -254,7 +283,7 @@ def build_app():
     with gr.Blocks(title='FER Live Model Comparison') as demo:
         gr.Markdown(
             "# Facial Expression Recognition — Live Model Comparison\n"
-            "Upload a face image, then click any of the five model buttons "
+            "Upload a face image, then click any of the seven model buttons "
             "below. Each click runs that specific model and saves the "
             "result panel into the output folder, named with the model."
         )
@@ -265,6 +294,8 @@ def build_app():
             btn_knn = gr.Button('KNN')
             btn_svm = gr.Button('SVM')
             btn_cnn = gr.Button('CNN')
+            btn_vgg = gr.Button('VGG16')
+            btn_mobilenet = gr.Button('MobileNetV2')
             btn_resnet = gr.Button('ResNet50')
             btn_effnet = gr.Button('EfficientNetB0')
 
@@ -277,6 +308,10 @@ def build_app():
                        inputs=image_input, outputs=[result_image, status_box])
         btn_cnn.click(fn=lambda img: analyze_with_model('CNN', img),
                        inputs=image_input, outputs=[result_image, status_box])
+        btn_vgg.click(fn=lambda img: analyze_with_model('VGG16', img),
+                       inputs=image_input, outputs=[result_image, status_box])
+        btn_mobilenet.click(fn=lambda img: analyze_with_model('MobileNetV2', img),
+                             inputs=image_input, outputs=[result_image, status_box])
         btn_resnet.click(fn=lambda img: analyze_with_model('ResNet50', img),
                           inputs=image_input, outputs=[result_image, status_box])
         btn_effnet.click(fn=lambda img: analyze_with_model('EfficientNetB0', img),

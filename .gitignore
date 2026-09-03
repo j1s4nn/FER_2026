@@ -1,20 +1,21 @@
-# I keep the raw dataset and generated artifacts out of version control,
-# they're either too large or too easy to regenerate to belong in git.
+# Dataset stays out of version control: it is large and trivial to
+# re-download with src/01_download_data.py.
 data/raw/*
 !data/raw/.gitkeep
 data/processed/*
 !data/processed/.gitkeep
 
+# Checkpoints are large binaries, regenerate them with train_all.py
 models/*
 !models/.gitkeep
 
-figures/*
-!figures/.gitkeep
+# NOTE: figures/ and metrics_summary.csv are committed ON PURPOSE.
+# They are the evidence of this comparative study (accuracy charts,
+# confusion matrices, training curves) and belong in the repo.
 
+# The live demo writes ad-hoc result screenshots here at runtime
 output/*
 !output/.gitkeep
-
-metrics_summary.csv
 
 # Kaggle credentials should never end up in a public repo
 kaggle.json
@@ -23,7 +24,9 @@ kaggle.json
 __pycache__/
 *.pyc
 .ipynb_checkpoints/
+.pytest_cache/
 .DS_Store
 *.egg-info/
 venv/
 .venv/
+

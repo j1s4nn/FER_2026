@@ -1,11 +1,19 @@
-numpy
-pandas
-matplotlib
-seaborn
-opencv-python
-Pillow
-scikit-learn
-torch
-torchvision
-kagglehub
-gradio
+# Core scientific stack — pinned against the project's conda env ("ml")
+numpy==1.26.4
+pandas==2.1.4
+matplotlib==3.10.6
+seaborn==0.13.2
+opencv-python==4.11.0.86
+pillow==11.1.0
+scikit-learn==1.7.1
+
+# Deep learning stack.
+# For GPU training install the CUDA build that matches your machine, e.g.:
+#   pip install torch==2.5.1 torchvision==0.20.1 --index-url https://download.pytorch.org/whl/cu121
+torch==2.5.1
+torchvision==0.20.1
+
+# Dataset download (src/01_download_data.py) and live demo (src/12_live_demo.py)
+kagglehub==0.3.13
+gradio==6.19.0
+

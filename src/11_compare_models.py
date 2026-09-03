@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 """
-09_compare_models.py
+11_compare_models.py
 
-This is the last step. By the time I get here, every one of the five
+This is the last step. By the time I get here, every one of the seven
 model scripts has already appended its row to metrics_summary.csv, so
 this script's job is just to read that file and turn it into the
 comparison figures and table I actually want to look at, side by side
@@ -10,10 +10,10 @@ bar charts, a grouped metrics chart, and a plain CSV table.
 
 I made this its own script instead of folding it into each model file so
 I can regenerate the comparison any time without retraining anything, as
-long as metrics_summary.csv already has all five rows in it.
+long as metrics_summary.csv already has all seven rows in it.
 
-Run this after all five model scripts have been run at least once:
-    python src/09_compare_models.py
+Run this after all seven model scripts have been run at least once:
+    python src/11_compare_models.py
 """
 
 import os
@@ -28,7 +28,8 @@ from config import FIGURES_DIR, BASE_DIR, MODEL_COLORS, ACCURACY_TARGET, ensure_
 from utils import apply_plot_style
 
 METRICS_CSV = os.path.join(BASE_DIR, 'metrics_summary.csv')
-EXPECTED_MODELS = ['KNN', 'SVM', 'CNN', 'ResNet50', 'EfficientNetB0']
+EXPECTED_MODELS = ['KNN', 'SVM', 'CNN', 'VGG16', 'MobileNetV2',
+                   'ResNet50', 'EfficientNetB0']
 
 
 def load_metrics():

@@ -66,6 +66,8 @@ MODEL_COLORS = {
     'KNN':             '#95a5a6',
     'SVM':             '#7f8c8d',
     'CNN':             '#2ecc71',
+    'VGG16':           '#9b59b6',
+    'MobileNetV2':     '#f39c12',
     'ResNet50':        '#e74c3c',
     'EfficientNetB0':  '#3498db',
 }

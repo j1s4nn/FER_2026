@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-07_model_resnet50.py
+09_model_resnet50.py
 
 Here I switch to transfer learning. I start from ResNet50 weights
 pretrained on ImageNet and only unfreeze the last conv block (layer4)
@@ -14,7 +14,7 @@ head sized for however many emotion classes are in the dataset, with
 dropout in between to keep it from memorizing the training faces.
 
 Run this after 02_preprocess_data.py:
-    python src/07_model_resnet50.py
+    python src/09_model_resnet50.py
 """
 
 import os
