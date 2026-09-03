@@ -53,14 +53,24 @@ ensure_dirs()
 device = get_device()
 eval_transform = get_eval_transform()
 
-face_cascade = cv2.CascadeClassifier(
-    cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
+# Lazy-loaded on first use: importing this module must stay side-effect free
+# (the test suite imports it on machines without a display), and this also
+# keeps the import working on cv2 builds where the legacy cascade API moved.
+_face_cascade = None
+
+
+def get_face_cascade():
+    global _face_cascade
+    if _face_cascade is None:
+        _face_cascade = cv2.CascadeClassifier(
+            cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
+    return _face_cascade
 
 
 # ── Face cropping helper, shared by every model's prediction path ──────────
 def crop_face(image_np):
     gray = cv2.cvtColor(image_np, cv2.COLOR_RGB2GRAY)
-    faces = face_cascade.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=5, minSize=(40, 40))
+    faces = get_face_cascade().detectMultiScale(gray, scaleFactor=1.1, minNeighbors=5, minSize=(40, 40))
     if len(faces) > 0:
         x, y, w, h = faces[0]
         pad = int(0.15 * w)

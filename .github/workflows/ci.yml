@@ -24,7 +24,9 @@ jobs:
 
       - name: Install project dependencies
         run: |
-          pip install numpy pandas matplotlib seaborn opencv-python-headless \
+          # opencv pinned <5: OpenCV 5.0 removed cv2.CascadeClassifier,
+          # which src/12_live_demo.py uses for face cropping
+          pip install numpy pandas matplotlib seaborn "opencv-python-headless==4.11.0.86" \
                       pillow scikit-learn kagglehub pytest
 
       - name: Run smoke tests
