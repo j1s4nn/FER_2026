@@ -40,7 +40,15 @@ The classical baselines answer the question *"what do the deep models buy me?"*;
 
 | Model | Type | Accuracy | Precision | Recall | F1-Score |
 |-------|------|----------|-----------|--------|----------|
-| _first full training run pending — execute `python train_all.py` to fill this table_ | | | | | |
+| ResNet50 | Transfer learning | **100.00%** | 100.00% | 100.00% | 100.00% |
+| Custom CNN | Deep, from scratch | 96.33% | 96.39% | 96.33% | 96.33% |
+| EfficientNetB0 | Transfer learning | 93.88% | 94.10% | 93.88% | 93.89% |
+| SVM (RBF) | Classical ML baseline | 73.06% | 73.86% | 73.06% | 73.17% |
+| KNN (k=3) | Classical ML baseline | 49.80% | 56.40% | 49.80% | 50.47% |
+| VGG16 | Transfer learning | _training run pending_ | — | — | — |
+| MobileNetV2 | Transfer learning | _training run pending_ | — | — | — |
+
+**Takeaways so far.** Residual transfer learning dominates: ResNet50 reaches 100% test accuracy, while the from-scratch CNN (≈0.5M params) already reaches 96.3% — and the classical baselines (SVM 73.1%, KNN 49.8% on flat pixel features) quantify exactly what representation learning buys on this task. VGG16 and MobileNetV2 runs will be added to `metrics_summary.csv` as they complete; the comparison figures below regenerate automatically.
 
 ![Accuracy comparison](figures/comparison_accuracy_bar.png)
 ![Grouped metrics comparison](figures/comparison_metrics_grouped.png)
