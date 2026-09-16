@@ -9,6 +9,16 @@
 
 ---
 
+## Motivation
+
+Deep models are routinely reported to beat classical baselines on image tasks,
+but the comparison is often unfair — different features, splits, or training
+budgets. FER_2026 asks a narrower, answerable question: *on 7-class facial
+expression recognition, how much does representation learning actually buy over
+flat-pixel classical baselines when every model shares one protocol?* Holding
+the dataset, split, and training loop constant makes the gap between KNN/SVM and
+the deep backbones a measurement rather than a claim.
+
 ## Overview
 
 Every model in this study is trained and evaluated under an **identical protocol** so the comparison is fair:
@@ -166,6 +176,18 @@ FER_2026/
 **Hardware used:** NVIDIA GeForce RTX 3060 (12 GB) · training time ≈ 10–20 min per deep model at 30 epochs.
 
 ---
+
+## Technology Stack
+
+`Python` · `PyTorch` · `torchvision` (VGG16, MobileNetV2, ResNet50, EfficientNetB0) · `scikit-learn` (KNN, SVM, metrics) · `NumPy` · `Pandas` · `Matplotlib` · `kagglehub` (CK+ download) · `Gradio` (live demo) · `pytest` (CPU smoke tests)
+
+## Future Improvements
+
+- Complete the pending VGG16 and MobileNetV2 training runs and add them to `metrics_summary.csv`
+- Report per-class recall and confusion analysis for the near-ceiling models, since overall accuracy saturates on CK+
+- Evaluate on a second, in-the-wild dataset (e.g., FER2013) to test whether the ranking holds beyond lab-controlled CK+ images
+- Add cross-validation instead of a single stratified split to tighten the comparison
+- Quantify the augmentation contribution with an ablation (balanced vs. raw CK+)
 
 ## License
 
